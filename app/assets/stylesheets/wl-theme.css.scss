@@ -1,0 +1,36 @@
+$wl-white: #FFFFFF;
+$wl-light-gray: #F5F5F5;
+$wl-gray: #D1D1D1;
+$wl-dark-gray: #444444;
+$wl-black: #000000;
+
+$wl-red: #DF2935;
+$wl-dark-red: #6F020E;
+$wl-green: #82D173;
+$wl-dark-green: #8CD867;
+$wl-blue: #1582A5;
+
+$wl-primary: $wl-green;
+
+///// BOOTSTRAP OVERRIDES /////
+
+// NAVBAR DEFAULT OVERRIDES //
+$navbar-default-color: $wl-primary;
+$navbar-default-bg: $wl-white;
+$navbar-default-border: $wl-light-gray;
+
+$navbar-default-link-color: $wl-dark-gray;
+$navbar-default-link-hover-color: darken( $navbar-default-link-color, 20% );
+$navbar-default-link-hover-bg: transparent !default;
+$navbar-default-link-active-color: $navbar-default-link-hover-color !default;
+$navbar-default-link-active-bg: darken($navbar-default-bg, 10%) !default;
+$navbar-default-link-disabled-color: #444 !default;
+$navbar-default-link-disabled-bg: transparent !default;
+
+$navbar-default-brand-color: $wl-primary !default;
+$navbar-default-brand-hover-color: $navbar-default-brand-color;
+$navbar-default-brand-hover-bg: transparent !default;
+
+$navbar-default-toggle-hover-bg: #ddd !default;
+$navbar-default-toggle-icon-bar-bg: #888 !default;
+$navbar-default-toggle-border-color: #ddd !default;
