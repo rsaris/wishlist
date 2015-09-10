@@ -5,4 +5,5 @@ class ApplicationController < ActionController::Base
 
   private
   include ApplicationHelper
+  include SessionsHelper
 end
