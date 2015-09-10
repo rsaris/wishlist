@@ -34,7 +34,19 @@ body {
   font-family: sans-serif;
 }
 
-/// BASIC ELEMENTS ///
+.field_with_errors {
+  @extend .has-error;
+}
+
+.alert-notice {
+  @extend .alert-warning;
+}
+
+.alert-error {
+  @extend .alert-danger;
+}
+
+//// WL ELEMENTS ////
 $header-height: $navbar-height;
 $footer-height: 0px;
 
@@ -82,8 +94,89 @@ $footer-height: 0px;
   }
 }
 
+#error-explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.flash-messages {
+  padding-top: 20px;
+}
+
+/// GENERIC ELEMENTS ///
+.col-full {
+  @extend .col-xs-12;
+}
+
+.btn-primary {
+  @include button-variant($wl-white, $wl-primary, darken($wl-primary, 5%));
+}
+
+.col-centered-form {
+  @extend .col-md-6;
+  @extend .col-md-offset-3;
+  @extend .col-sm-10;
+  @extend .col-sm-offset-1;
+  @extend .col-xs-12;
+}
+
+.form-centered {
+  @extend .form-horizontal;
+
+  .col-form-label {
+    @extend .col-xs-12;
+  }
+
+  .col-form-input {
+    @extend .col-xs-12;
+  }
+
+  .col-submit {
+    @extend .col-xs-12;
+
+    text-align: center;
+  }
+
+  .btn {
+  }
+
+  .btn-submit {
+    @extend .btn-primary;
+  }
+}
+
 ////// PAGES /////////
+.padded-page {
+  padding: 20px 0;
+}
+
+.row-header {
+  @extend .row;
+
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
 
 .home-page {
-  padding: 20px 0;
+  @extend .padded-page;
+}
+
+.new-user-page {
+  @extend .padded-page;
+
+  .row-form {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
+
+.show-user-page {
+  @extend .padded-page;
+
+  h3 {
+    text-align: center;
+  }
 }

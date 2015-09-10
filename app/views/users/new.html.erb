@@ -1,0 +1,57 @@
+<div class="new-user-page">
+  <div class="container">
+    <div class="row-header">
+      <div class="col-full">
+        <h1>Sign Up</h1>
+      </div>
+    </div>
+    <div class="row-form">
+      <div class="col-centered-form">
+      <%= form_for @user, :html => { :class => "form-centered" } do |f| %>
+        <%= render 'shared/error_messages', :model => @user %>
+        <div class="form-group">
+          <div class="col-form-label">
+            <%= f.label :full_name, :class => "control-label" %>
+          </div>
+          <div class="col-form-input">
+            <%= f.text_field :full_name, :class => "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-form-label">
+            <%= f.label :email, :class => "control-label" %>
+          </div>
+          <div class="col-form-input">
+            <%= f.text_field :email, :class => "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-form-label">
+            <%= f.label :password, :class => "control-label" %>
+          </div>
+          <div class="col-form-input">
+            <%= f.password_field :password, :class => "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-form-label">
+            <%= f.label :password_confirmation, :class => "control-label" %>
+          </div>
+          <div class="col-form-input">
+            <%= f.password_field :password_confirmation, :class => "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-submit">
+            <%= f.submit "Create account", :class => "btn btn-submit" %>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
