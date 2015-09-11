@@ -4,9 +4,16 @@ class User < ActiveRecord::Base
 
   has_many :remember_tokens, dependent: :destroy
 
+  has_many :regular_friendships, foreign_key: :user_id, class_name: 'Friendship', dependent: :destroy
+  has_many :inverse_friendships, foreign_key: :friend_id, class_name: 'Friendship', dependent: :destroy
+
   has_secure_password
 
   before_save do
     self.email = email.downcase
+  end
+
+  def friends
+    self.regular_friendships.to_a.concat( self.inverse_friendships.to_a ).select{ |friendship| friendship.accepted }.map{ |friendship| friendship.user_id == self.id ? friendship.friend : friendship.user }
   end
 end
