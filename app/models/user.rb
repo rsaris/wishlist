@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  scope :by_search, -> (search) { search.nil? ? all : where( 'full_name like ?', "%#{search}%") }
+
   before_save do
     self.email = email.downcase
   end

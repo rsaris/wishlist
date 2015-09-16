@@ -1,0 +1,46 @@
+<div class="users-page">
+  <div class="container">
+    <div class="row-header">
+      <div class="col-full">
+        <h1>Find Friends</h1>
+      </div>
+    </div>
+    <div class="row-search">
+      <div class="col-search">
+        <div class="input-group">
+          <%= text_field_tag :search, nil, :class => 'form-control' %>
+          <div class="input-group-btn">
+            <span onclick="submitSearch();" class="btn btn-primary">Search</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row-user-list">
+      <div class="col-user-list">
+        <ul class="user-list">
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function submitSearch() {
+    searchTerm = $('#search').val();
+    $.ajax({
+      url: '<%= user_search_path %>',
+      data: {
+        search: searchTerm
+      },
+      success: function( data ) {
+        userData = data;
+        $('.user-list li').remove();
+        $.each( data['users'], function( index, user ) {
+          $('.user-list').append(
+            '<li><a href=<%= users_path %>/' + user['id'] + ">" + user['full_name'] + '</a></li>'
+          );
+        });
+      }
+    });
+  }
+</script>

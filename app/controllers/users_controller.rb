@@ -21,6 +21,13 @@ class UsersController < ApplicationController
     @user = User.find( params[:id] )
   end
 
+  def search
+    @users = User.by_search( params[:search] )
+    respond_to do |format|
+      format.json
+    end
+  end
+
   private
   def user_params
     params.require( :user ).permit( :full_name, :email, :password, :password_confirmation )
