@@ -9,13 +9,42 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  scope :by_search, -> (search) { search.nil? ? all : where( 'full_name like ?', "%#{search}%") }
-
   before_save do
     self.email = email.downcase
   end
 
   def friends
-    self.regular_friendships.to_a.concat( self.inverse_friendships.to_a ).select{ |friendship| friendship.accepted }.map{ |friendship| friendship.user_id == self.id ? friendship.friend : friendship.user }
+    User.find( friend_ids )
+  end
+
+  def has_friend?( user )
+    Friendship.where( '((user_id = ? and friend_id = ?) or (friend_id = ? and user_id = ?)) and accepted = ?', user.id, self.id, user.id, self.id, true ).exists?
+  end
+
+  def User.search( search_term )
+    if search_term.nil?
+      return []
+    elsif search_term.match( ApplicationHelper.email_regex )
+      User.where( 'email like ?', "%#{search_term}%" )
+    else
+      User.where( 'full_name like ?', "%#{search_term}%")
+    end
+  end
+
+  private
+  def friend_ids
+    regular_friend_ids = self.regular_friendships.select{
+      |friendship| friendship.accepted?
+    }.map{
+      |friendship| friendship.friend_id
+    }
+
+    inverse_friend_ids = self.inverse_friendships.select{
+      |friendship| friendship.accepted?
+    }.map{
+      |friendship| friendship.user_id
+    }
+
+    regular_friend_ids.concat( inverse_friend_ids )
   end
 end

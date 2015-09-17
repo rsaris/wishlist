@@ -8,7 +8,11 @@
     </div>
     <div class="row-controls">
       <div class="col-full">
-        <%= link_to 'Find Friends', users_path, :class => 'btn btn-primary' %>
+        <% if current_user?( @user ) %>
+          <%= link_to 'Find Friends', users_path, :class => 'btn btn-primary' %>
+        <% elsif !@user.has_friend?( current_user ) %>
+          <%= link_to 'Request Friend', add_friend_path( :friend_id => @user.id ), :class => 'btn btn-primary', :method => 'post' %>
+        <% end %>
       </div>
     </div>
   </div>

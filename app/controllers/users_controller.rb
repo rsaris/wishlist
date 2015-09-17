@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :correct_user, only: [:show]
+  before_action :signed_in_user, only: [:show, :index, :add_friend]
 
   def new
     @user = User.new
@@ -21,11 +21,19 @@ class UsersController < ApplicationController
     @user = User.find( params[:id] )
   end
 
+  def index
+  end
+
   def search
-    @users = User.by_search( params[:search] )
+    @users = User.search( params[:search] )
     respond_to do |format|
       format.json
     end
+  end
+
+  def add_friend
+    @friend = User.find( params[:friend_id] )
+    Friendship.create( :friend_id => @friend.id, :user_id => current_user.id )
   end
 
   private
