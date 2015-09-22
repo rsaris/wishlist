@@ -10,10 +10,40 @@
       <div class="col-full">
         <% if current_user?( @user ) %>
           <%= link_to 'Find Friends', users_path, :class => 'btn btn-primary' %>
+        <% elsif request = @user.pending_request( current_user ) %>
+          <%= link_to 'Accept Request', accept_friend_path( :friendship_id => request.id ), :class => 'btn btn-primary', :method => 'post' %>
         <% elsif !@user.has_friend?( current_user ) %>
           <%= link_to 'Request Friend', add_friend_path( :friend_id => @user.id ), :class => 'btn btn-primary', :method => 'post' %>
         <% end %>
       </div>
     </div>
+    <% if current_user?( @user ) && @user.friend_requests.count > 0 %>
+    <div class="row-requests">
+      <div class="col-full">
+        <div class="header">
+          Pending Requests
+        </div>
+        <ul class="friend-request-list">
+          <% @user.friend_requests( :include_users => true ).each do |request| %>
+            <li><%= request.user.full_name %> <%= link_to 'Accept', accept_friend_path( :friendship_id => request.id ), :method => :post %> <%= link_to 'Deny', deny_friend_path( :friendship_id => request.id ), :method => :post, :data => { :confirm => 'Are you sure?' } %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <% end %>
+    <% if current_user?( @user ) || @user.has_friend?( current_user ) %>
+    <div class="row-friends">
+      <div class="col-full">
+        <div class="header">
+          Friends
+        </div>
+        <ul class="friend-list">
+          <% @user.friends.each do |friend| %>
+            <li><%= link_to friend.full_name, user_path( friend ) %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <% end %>
   </div>
 </div>

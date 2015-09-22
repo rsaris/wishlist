@@ -9,6 +9,9 @@ class Friendship < ActiveRecord::Base
 
   before_create :seed_accepted
 
+  scope :with_friend, ->{ includes( :friend ) }
+  scope :with_user, ->{ includes( :user ) }
+
   private
   def different_users
     if self.user_id == self.friend_id

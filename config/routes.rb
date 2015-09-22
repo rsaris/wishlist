@@ -7,6 +7,8 @@ Wishlist::Application.routes.draw do
 
   match '/users/search', to: 'users#search', via: 'get', as: :user_search
   match '/users/add_friend', to: 'users#add_friend', via: 'post', as: :add_friend
+  match '/users/accept_friend', to: 'users#accept_friend', via: 'post', as: :accept_friend
+  match '/users/deny_friend', to: 'users#deny_friend', via: 'post', as: :deny_friend
 
   resources :users, only: [:new, :create, :show, :index]
   resources :sessions, only: [:new, :create, :destroy]

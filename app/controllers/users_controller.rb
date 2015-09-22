@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :signed_in_user, only: [:show, :index, :add_friend]
+  before_action :signed_in_user, except: [:new, :create]
 
   def new
     @user = User.new
@@ -34,6 +34,27 @@ class UsersController < ApplicationController
   def add_friend
     @friend = User.find( params[:friend_id] )
     Friendship.create( :friend_id => @friend.id, :user_id => current_user.id )
+  end
+
+  def accept_friend
+    @request = Friendship.find( params[:friendship_id] )
+
+    if @request.friend_id == current_user.id
+      @request.update_attribute( :accepted, true )
+      flash[:success] = 'Request accepted.'
+    end
+
+    redirect_to user_path( current_user )
+  end
+
+  def deny_friend
+    @request = Friendship.find( params[:friendship_id] )
+    if @request.friend_id == current_user.id
+      @request.destroy
+      flash[:success] = 'Request deleted.'
+    end
+
+    redirect_to user_path( current_user )
   end
 
   private

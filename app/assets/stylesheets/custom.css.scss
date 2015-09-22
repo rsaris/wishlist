@@ -180,8 +180,62 @@ $footer-height: 0px;
     text-align: center;
   }
 
+  .row-header {
+    @extend .row;
+  }
+
   .row-controls {
+    @extend .row;
+
     text-align: center;
+  }
+
+  .row-requests {
+    @extend .row;
+
+    .header {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 400;
+
+      margin: 20px 0;
+    }
+
+    .friend-request-list {
+      list-style: none;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+
+      li {
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+
+  .row-friends {
+    @extend .row;
+
+    .header {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 400;
+
+      margin: 20px 0;
+    }
+
+    .friend-list {
+      list-style: none;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+
+      li {
+        padding: 0;
+        margin: 0;
+      }
+    }
   }
 }
 

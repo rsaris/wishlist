@@ -31,6 +31,29 @@ class User < ActiveRecord::Base
     Friendship.where( '((user_id = ? and friend_id = ?) or (friend_id = ? and user_id = ?)) and accepted = ?', user.id, self.id, user.id, self.id, true ).exists?
   end
 
+  def friend_requests( options = {} )
+    scope = Friendship
+
+    if options[:include_friends]
+      scope = scope.with_friend
+    end
+
+    if options[:include_users]
+      scope = scope.with_user
+    end
+
+    scope.where( 'friend_id = ? and accepted = ?', self.id, false )
+  end
+
+  def pending_request( friend )
+    Friendship.find_by( 'user_id = ? and friend_id = ? and accepted = ?', self.id, friend.id, false )
+  end
+
+  def header_link_text
+    num_friend_requests = self.friend_requests.count
+    'My Account' + (num_friend_requests > 0 ? " (#{num_friend_requests})" : '')
+  end
+
   private
   def friend_ids
     regular_friend_ids = self.regular_friendships.select{
