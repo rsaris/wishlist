@@ -9,6 +9,16 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  scope :by_search, ->(search_term) {
+    if search_term.nil?
+      none
+    elsif search_term.match( ApplicationHelper.email_regex )
+      where( 'email like ?', "%#{search_term}%" )
+    else
+      where( 'full_name like ?', "%#{search_term}%")
+    end
+  }
+
   before_save do
     self.email = email.downcase
   end
@@ -19,16 +29,6 @@ class User < ActiveRecord::Base
 
   def has_friend?( user )
     Friendship.where( '((user_id = ? and friend_id = ?) or (friend_id = ? and user_id = ?)) and accepted = ?', user.id, self.id, user.id, self.id, true ).exists?
-  end
-
-  def User.search( search_term )
-    if search_term.nil?
-      return []
-    elsif search_term.match( ApplicationHelper.email_regex )
-      User.where( 'email like ?', "%#{search_term}%" )
-    else
-      User.where( 'full_name like ?', "%#{search_term}%")
-    end
   end
 
   private

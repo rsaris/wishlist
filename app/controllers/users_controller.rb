@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    @users = User.search( params[:search] )
+    @users = User.by_search( params[:search] ).where( "id != ?", current_user.id )
     respond_to do |format|
       format.json
     end

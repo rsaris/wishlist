@@ -40,6 +40,11 @@
             '<li><a href=<%= users_path %>/' + user['id'] + '>' + user['full_name'] + ' (' + user['email'] + ')</a></li>'
           );
         });
+        if( data['users'].length == 0 ) {
+          $('.user-list').append(
+            '<li>No users found...</li>'
+          )
+        }
       }
     });
   }
