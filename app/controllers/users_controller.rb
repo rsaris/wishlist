@@ -34,6 +34,8 @@ class UsersController < ApplicationController
   def add_friend
     @friend = User.find( params[:friend_id] )
     Friendship.create( :friend_id => @friend.id, :user_id => current_user.id )
+    flash[:success] = 'Friend added!'
+    redirect_to users_path
   end
 
   def accept_friend
