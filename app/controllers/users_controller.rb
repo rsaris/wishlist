@@ -22,6 +22,11 @@ class UsersController < ApplicationController
   end
 
   def index
+    if params[:search]
+      @users = User.by_search( params[:search] ).where( "id != ?", current_user.id )
+    else
+      @users = []
+    end
   end
 
   def search
