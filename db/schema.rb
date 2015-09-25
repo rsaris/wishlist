@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911015220) do
+ActiveRecord::Schema.define(version: 20150925014928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 20150911015220) do
     t.integer  "user_id"
     t.integer  "friend_id"
     t.boolean  "accepted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "gift_requests", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

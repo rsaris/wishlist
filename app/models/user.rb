@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
   has_many :regular_friendships, foreign_key: :user_id, class_name: 'Friendship', dependent: :destroy
   has_many :inverse_friendships, foreign_key: :friend_id, class_name: 'Friendship', dependent: :destroy
 
+  has_many :gift_requests, dependent: :destroy
+
+  accepts_nested_attributes_for :gift_requests, allow_destroy: true
+
   has_secure_password
 
   scope :by_search, ->(search_term) {

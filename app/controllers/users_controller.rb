@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-  before_action :signed_in_user, except: [:new, :create]
+  before_action :signed_in_user, except: [:new, :create, :update]
+  before_action :correct_user, only: [:update]
 
   def new
     @user = User.new
@@ -27,6 +28,17 @@ class UsersController < ApplicationController
     else
       @users = []
     end
+  end
+
+  def update
+    user = User.find( params[:id] )
+
+    params[:user][:gift_requests_attributes].each do |key, hash|
+      hash[:user_id] = user.id
+      GiftRequest.create( hash )
+    end
+
+    redirect_to user_path( user )
   end
 
   def search

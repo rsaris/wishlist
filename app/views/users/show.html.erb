@@ -45,5 +45,30 @@
       </div>
     </div>
     <% end %>
+    <% if current_user?( @user ) || @user.has_friend?( current_user ) %>
+    <div class="row-gift-requests">
+      <div class="col-centered-form">
+        <div class="header">
+          Gift Requests
+        </div>
+        <ul class="gift-list">
+          <% @user.gift_requests.each do |gift_request| %>
+            <li><%= gift_request.name %></li>
+          <% end %>
+        </ul>
+        <% if current_user?( @user ) %>
+          <%= form_for @user, :html => { :class => "form-centered" } do |f| %>
+            <div id="gift-requests"></div>
+            <%= link_to_add_fields 'Add Gift', f, :gift_requests, :layout_dir => 'users', :insert_element => '#gift-requests' %>
+            <div class="form-group">
+              <div class="col-submit">
+                <%= f.submit 'Submit Gifts', :class => 'btn btn-submit' %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
   </div>
 </div>

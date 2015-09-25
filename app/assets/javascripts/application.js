@@ -14,3 +14,23 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require_tree .
+
+function add_fields(link, association, content, insert_element_string) {
+  var new_id = new Date().getTime();
+  var regexp = new RegExp("new_" + association, "g");
+  var cleaned_content = content.replace(regexp, new_id);
+
+  if( insert_element_string == null ) {
+    $(link).before( cleaned_content );
+  } else {
+    $(insert_element_string).append( cleaned_content );
+  }
+
+  return false;
+}
+
+function remove_fields(link) {
+  $(link).prev("input[type=hidden]").val("1");
+  $(link).closest(".fields").slideUp(250);
+  return false;
+}
