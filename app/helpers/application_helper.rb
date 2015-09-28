@@ -13,7 +13,11 @@ module ApplicationHelper
       render( layout_dir + '/' + partial_name, :f => builder )
     end
 
-    link_to( name, '#', :onclick => "return add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\", #{insert_element_string});" )
+    link_options = { :onclick => "return add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\", #{insert_element_string});" }
+    if options[:link_options]
+      link_options.merge!( options[:link_options] )
+    end
+    link_to( name, '#', link_options )
   end
 
   def link_to_remove_fields(name, f)
