@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, foreign_key: :friend_id, class_name: 'Friendship', dependent: :destroy
 
   has_many :gift_requests, dependent: :destroy
+  has_many :gifts, dependent: :destroy
+  has_many :gifts_purchased, foreign_key: :buyer_user_id, class_name: 'Gift', inverse_of: :buyer, dependent: :destroy
 
   accepts_nested_attributes_for :gift_requests, allow_destroy: true
 

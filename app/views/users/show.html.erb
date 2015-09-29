@@ -70,5 +70,42 @@
       </div>
     </div>
     <% end %>
+    <% if !current_user?( @user ) && @user.has_friend?( current_user ) %>
+    <div class="row-gifts">
+      <div class="col-centered-form">
+        <div class="header">
+          Gifts Purchased
+        </div>
+        <ul class="gift-list">
+          <% @user.gifts.each do |gift| %>
+            <li><%= gift.name %> (<%= link_to gift.buyer.full_name, user_path( gift.buyer ) %>)</li>
+          <% end %>
+        </ul>
+        <%= form_for :gift, :url => buy_user_gift_path( :user_id => @user.id, :buyer_user_id => current_user.id ), :html => { :class => 'form-centered' } do |f| %>
+          <div class="form-group">
+            <div class="col-form-label">
+              <%= f.label :name, :class => 'control-label' %>
+            </div>
+            <div class="col-form-input">
+              <%= f.text_field :name, :class => 'form-control' %>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-form-label">
+              <%= f.label :description, :class => 'control-label' %>
+            </div>
+            <div class="col-form-input">
+              <%= f.text_area :description, :class => 'form-control' %>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-submit">
+              <%= f.submit 'Submit Gift Purchased', :class => 'btn btn-submit' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
   </div>
 </div>

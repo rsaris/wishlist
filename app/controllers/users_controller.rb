@@ -76,6 +76,24 @@ class UsersController < ApplicationController
     redirect_to user_path( current_user )
   end
 
+  def buy_gift
+    user = User.find( params[:user_id] )
+    buyer = User.find( params[:buyer_user_id] )
+
+    if buyer.has_friend?( user )
+      Gift.create(
+        :user_id => user.id,
+        :buyer_user_id => buyer.id,
+        :name => params[:gift][:name],
+        :description => params[:gift][:description]
+      )
+    end
+
+    flash[:success] = 'Gift purchase logged.'
+
+    redirect_to user_path( user )
+  end
+
   private
   def user_params
     params.require( :user ).permit( :full_name, :email, :password, :password_confirmation )
