@@ -53,7 +53,10 @@
         </div>
         <ul class="gift-list">
           <% @user.gift_requests.each do |gift_request| %>
-            <li><%= gift_request.name %></li>
+            <li>
+              <p class="name"><%= gift_request.name %></p>
+              <p class="description"><%= gift_request.description %></p>
+            </li>
           <% end %>
         </ul>
         <% if current_user?( @user ) %>
@@ -78,7 +81,11 @@
         </div>
         <ul class="gift-list">
           <% @user.gifts.each do |gift| %>
-            <li><%= gift.name %> (<%= link_to gift.buyer.full_name, user_path( gift.buyer ) %>)</li>
+            <li>
+              <p class="name"><%= gift.name %></p>
+              <p class="buyer"><%= link_to gift.buyer.full_name, user_path( gift.buyer ) %></p>
+              <p class="description"><%= gift.description %></p>
+            </li>
           <% end %>
         </ul>
         <%= form_for :gift, :url => buy_user_gift_path( :user_id => @user.id, :buyer_user_id => current_user.id ), :html => { :class => 'form-centered' } do |f| %>
