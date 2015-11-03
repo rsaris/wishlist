@@ -1,5 +1,7 @@
 Wishlist::Application.routes.draw do
-  root 'static_pages#home'
+  root 'static_pages#root'
+
+  match '/home', to: 'static_pages#home', via: :get, as: :home
 
   match '/signin', to: 'sessions#new', via: :get, as: :signin
   match '/signup', to: 'users#new', via: :get, as: :signup

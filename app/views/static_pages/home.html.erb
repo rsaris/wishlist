@@ -3,7 +3,15 @@
     <div class="row-header">
       <div class="col-full">
         <h1>Welcome to Bob's Wishlist Tracker!</h1>
-        <h2>Sign up <%= link_to 'here', signup_path %></h2>
+        <% if signed_in? %>
+          <% if current_user.friend_requests.size > 0 %>
+            <h2>You have pending friend requests! Check them out <%= link_to 'here', user_path( current_user ) %></h2>
+          <% else %>
+            <h2>Find some friends <%= link_to 'here', users_path %></h2>
+          <% end %>
+        <% else %>
+          <h2>Sign up <%= link_to 'here', signup_path %></h2>
+        <% end %>
       </div>
     </div>
   </div>
