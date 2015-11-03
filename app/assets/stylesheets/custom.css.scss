@@ -172,12 +172,29 @@ $footer-height: 0px;
   }
 }
 
+.signin-page {
+  @extend .padded-page;
+
+  .row-form {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .row-note {
+    text-align: center;
+  }
+}
+
 .new-user-page {
   @extend .padded-page;
 
   .row-form {
     margin-top: 40px;
     margin-bottom: 40px;
+  }
+
+  .row-note {
+    text-align: center;
   }
 }
 
