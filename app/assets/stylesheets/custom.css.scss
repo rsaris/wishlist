@@ -162,6 +162,14 @@ $footer-height: 0px;
 
 .home-page {
   @extend .padded-page;
+
+  h1 {
+    margin-top: 50px;
+  }
+
+  h2 {
+    margin-top: 40px;
+  }
 }
 
 .new-user-page {
