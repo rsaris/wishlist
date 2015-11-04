@@ -16,3 +16,14 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(window).resize( function() {
+    var pageHeight = $(window).height() - $('.wl-header').outerHeight();
+    var topPadding = (pageHeight - $('.row-header').outerHeight()) / 2 - 100;
+    $('.home-page').css( 'min-height', pageHeight );
+    $('.home-page').css( 'padding-top', topPadding );
+  });
+
+  $(document).ready( function() { $(window).trigger( 'resize' ) } );
+</script>
