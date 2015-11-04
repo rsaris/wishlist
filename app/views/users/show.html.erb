@@ -83,8 +83,8 @@
           <% @user.gifts.each do |gift| %>
             <li>
               <p class="name"><%= gift.name %></p>
-              <p class="buyer"><%= link_to gift.buyer.full_name, user_path( gift.buyer ) %></p>
               <p class="description"><%= gift.description %></p>
+              <p class="buyer">Purchased by: <%= link_to gift.buyer.full_name, user_path( gift.buyer ) %></p>
             </li>
           <% end %>
         </ul>
@@ -111,6 +111,22 @@
             </div>
           </div>
         <% end %>
+      </div>
+    </div>
+    <% end %>
+    <% if current_user?( @user ) %>
+    <div class="row-gifts">
+      <div class="col-centered-form">
+        <div class="header">
+          Gifts Purchased
+        </div>
+        <ul class="gift-list">
+          <% @user.gifts_purchased.each do |gift| %>
+            <p class="name"><%= gift.name %></p>
+            <p class="description"><%= gift.description %></p>
+            <p class="buyer">Purchased for: <%= link_to gift.user.full_name, user_path( gift.user ) %></p>
+          <% end %>
+        </ul>
       </div>
     </div>
     <% end %>
