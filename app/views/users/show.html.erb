@@ -60,11 +60,11 @@
           <% end %>
         </ul>
         <% if current_user?( @user ) %>
-          <%= form_for @user, :html => { :class => "form-centered" } do |f| %>
+          <%= form_for @user, :html => { :class => "form-centered", :onsubmit => "return checkGiftRequests( this );" } do |f| %>
             <div id="gift-requests"></div>
             <div class="form-group">
               <div class="col-submit">
-                <%= link_to_add_fields 'Add Another Gift', f, :gift_requests, :layout_dir => 'users', :insert_element => '#gift-requests', :link_options => { :class => 'btn btn-submit' }  %>
+                <%= link_to_add_fields 'Add Gift', f, :gift_requests, :layout_dir => 'users', :insert_element => '#gift-requests', :link_options => { :class => 'btn btn-submit' }  %>
                 <%= f.submit 'Submit Gifts', :class => 'btn btn-submit' %>
               </div>
             </div>
@@ -116,3 +116,14 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  function checkGiftRequests( sender ) {
+    if( $(sender).find( '#gift-requests .gift-request-fields' ).size() > 0 ) {
+      return true;
+    } else {
+      alert( 'Please add a gift before submitting.' );
+      return false;
+    }
+  }
+</script>
