@@ -176,17 +176,16 @@ $footer-height: 0px;
 
   color: $wl-dark-green;
 
+  text-align: center;
+
   h1 {
     font-size: 54px;
   }
 
-  h2 {
+  .btn {
     margin-top: 40px;
     font-size: 36px;
-  }
-
-  a {
-    color: $wl-white;
+    padding: 10px 50px;
   }
 }
 

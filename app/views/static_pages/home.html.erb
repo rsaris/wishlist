@@ -10,7 +10,7 @@
             <h2>Find some friends <%= link_to 'here', users_path %></h2>
           <% end %>
         <% else %>
-          <h2>Sign up <%= link_to 'here', signup_path %></h2>
+          <%= link_to 'Sign Up', signup_path, :class => 'btn btn-lg btn-white-on-green' %>
         <% end %>
       </div>
     </div>
