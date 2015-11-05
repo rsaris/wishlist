@@ -22,7 +22,11 @@
     var pageHeight = $(window).height() - $('.wl-header').outerHeight();
     var topPadding = (pageHeight - $('.row-header').outerHeight()) / 2 - 100;
     $('.home-page').css( 'min-height', pageHeight );
-    $('.home-page').css( 'padding-top', topPadding );
+    if( topPadding > 0 ) {
+      $('.row-header').css( 'margin-top', topPadding );
+    } else {
+      $('.row-header').css( 'maring-top', '30px' );
+    }
   });
 
   $(document).ready( function() { $(window).trigger( 'resize' ) } );
