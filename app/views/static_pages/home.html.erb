@@ -2,16 +2,18 @@
   <div class="container">
     <div class="row-header">
       <div class="col-full">
-        <h1>Welcome to Bob's Wishlist Tracker!</h1>
-        <% if signed_in? %>
-          <% if current_user.friend_requests.size > 0 %>
-            <h2>You have pending friend requests! Check them out <%= link_to 'here', user_path( current_user ) %></h2>
+        <div class="header-content">
+          <h1>Welcome to Bob's Wishlist Tracker!</h1>
+          <% if signed_in? %>
+            <% if current_user.friend_requests.size > 0 %>
+              <h2>You have pending friend requests! Check them out <%= link_to 'here', user_path( current_user ) %></h2>
+            <% else %>
+              <h2>Find some friends <%= link_to 'here', users_path %></h2>
+            <% end %>
           <% else %>
-            <h2>Find some friends <%= link_to 'here', users_path %></h2>
+            <%= link_to 'Sign Up', signup_path, :class => 'btn btn-lg btn-white-on-green' %>
           <% end %>
-        <% else %>
-          <%= link_to 'Sign Up', signup_path, :class => 'btn btn-lg btn-white-on-green' %>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>
@@ -20,12 +22,12 @@
 <script>
   $(window).resize( function() {
     var pageHeight = $(window).height() - $('.wl-header').outerHeight();
-    var topPadding = (pageHeight - $('.row-header').outerHeight()) / 2 - 100;
+    var topPadding = (pageHeight - $('.header-content').outerHeight()) / 2 - 100;
     $('.home-page').css( 'min-height', pageHeight );
     if( topPadding > 0 ) {
-      $('.row-header').css( 'margin-top', topPadding );
+      $('.header-content').css( 'margin-top', topPadding );
     } else {
-      $('.row-header').css( 'maring-top', '30px' );
+      $('.header-content').css( 'maring-top', '30px' );
     }
   });
 

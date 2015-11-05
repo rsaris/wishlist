@@ -172,11 +172,13 @@ $footer-height: 0px;
   background-image: image-url('background-christmas-presents.jpg');
 
   min-height: 350px;
-  margin-top: 30px;
 
   color: $wl-dark-green;
 
-  text-align: center;
+  .header-content {
+    text-align: center;
+    margin-top: 30px;
+  }
 
   h1 {
     font-size: 54px;
