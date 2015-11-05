@@ -18,10 +18,8 @@ class User < ActiveRecord::Base
   scope :by_search, ->(search_term) {
     if search_term.nil?
       none
-    elsif search_term.match( ApplicationHelper.email_regex )
-      where( 'email like ?', "%#{search_term}%" )
     else
-      where( 'full_name like ?', "%#{search_term}%")
+      where( 'full_name ilike any(array[?]) or email ilike ?', search_term.split( " " ).map{ |term| "%#{term}%" }, "%#{search_term}%" )
     end
   }
 
