@@ -32,7 +32,11 @@ class User < ActiveRecord::Base
   end
 
   def has_friend?( user )
-    Friendship.where( '((user_id = ? and friend_id = ?) or (friend_id = ? and user_id = ?)) and accepted = ?', user.id, self.id, user.id, self.id, true ).exists?
+    self.has_friend_with_id?( user.id )
+  end
+
+  def has_friend_with_id?( user_id )
+    Friendship.where( '((user_id = ? and friend_id = ?) or (friend_id = ? and user_id = ?)) and accepted = ?', user_id, self.id, user_id, self.id, true ).exists?
   end
 
   def friend_requests( options = {} )

@@ -12,6 +12,7 @@ Wishlist::Application.routes.draw do
   match '/users/accept_friend', to: 'users#accept_friend', via: 'post', as: :accept_friend
   match '/users/deny_friend', to: 'users#deny_friend', via: 'post', as: :deny_friend
   match '/users/buy_gift', to: 'users#buy_gift', via: 'post', as: :buy_user_gift
+  match '/users/mark_gift_request_purchased', to: 'users#mark_gift_request_purchased', via: 'post', as: :mark_gift_request_purchased
 
   resources :users, only: [:new, :create, :show, :index, :update]
   resources :sessions, only: [:new, :create, :destroy]

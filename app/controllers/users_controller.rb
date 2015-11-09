@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :signed_in_user, except: [:new, :create, :update]
+  before_action :signed_in_user, except: [:new, :create, :update, :mark_gift_request_purchased]
   before_action :correct_user, only: [:update]
 
   def new
@@ -92,6 +92,20 @@ class UsersController < ApplicationController
     flash[:success] = 'Gift purchase logged.'
 
     redirect_to user_path( user )
+  end
+
+  def mark_gift_request_purchased
+    gift_request = GiftRequest.find( params[:gift_request_id] )
+    if !current_user.has_friend_with_id?( gift_request.user_id )
+      flash[:error] = 'Can not purchase gift for non-friend'
+    elsif gift_request.purchased?
+      flash[:error] = 'This gift has already been marked as purchased'
+    else
+      gift_request.update_attribute( :purchased_by_user_id, current_user.id )
+      flash[:success] = 'Gift marked as purchased'
+    end
+
+    redirect_to user_path( gift_request.user_id )
   end
 
   private
