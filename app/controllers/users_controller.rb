@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :signed_in_user, except: [:new, :create, :update, :mark_gift_request_purchased]
+  before_action :signed_in_user, except: [:new, :create, :update, :mark_gift_request_purchased, :delete_gift_request]
   before_action :correct_user, only: [:update]
 
   def new
@@ -111,6 +111,19 @@ class UsersController < ApplicationController
         )
       end
       flash[:success] = 'Gift marked as purchased'
+    end
+
+    redirect_to user_path( gift_request.user_id )
+  end
+
+  def delete_gift_request
+    gift_request = GiftRequest.find( params[:gift_request_id] )
+
+    if current_user_id?( gift_request.user_id )
+      gift_request.destroy
+      flash[:success] = 'Gift request destroyed.'
+    else
+      flash[:error] = 'Can not delete gift requests for other users'
     end
 
     redirect_to user_path( gift_request.user_id )

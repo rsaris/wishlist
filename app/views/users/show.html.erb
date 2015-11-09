@@ -59,7 +59,9 @@
               <li>
                 <p class="name"><%= gift_request.name %></p>
                 <p class="description"><%= gift_request.description %></p>
-                <% if !current_user?( @user ) %>
+                <% if current_user?( @user ) %>
+                  <%= link_to 'Delete request', delete_gift_request_path( :gift_request_id => gift_request.id ), :method => :delete, :data => { :confirm => 'Really delete this? (This can not be undone)' } %>
+                <% else %>
                   <% if gift_request.purchased? %>
                     (Purchased)
                   <% else %>
