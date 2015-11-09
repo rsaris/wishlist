@@ -102,6 +102,14 @@ class UsersController < ApplicationController
       flash[:error] = 'This gift has already been marked as purchased'
     else
       gift_request.update_attribute( :purchased_by_user_id, current_user.id )
+      if params[:copy_item] == 'true'
+        Gift.create(
+          :user_id => gift_request.user_id,
+          :buyer_user_id => current_user.id,
+          :name => gift_request.name,
+          :description => gift_request.description
+        )
+      end
       flash[:success] = 'Gift marked as purchased'
     end
 

@@ -63,7 +63,7 @@
                   <% if gift_request.purchased? %>
                     (Purchased)
                   <% else %>
-                    <%= link_to 'Mark Purchased', mark_gift_request_purchased_path( :gift_request_id => gift_request.id ), :method => :post, :class => 'mark-gift-purchased-link' %>
+                    <%= link_to 'Mark Purchased', mark_gift_request_purchased_path( :gift_request_id => gift_request.id ), :method => :post, :onclick => 'return markGiftRequestPurchased( this );', :class => 'mark-gift-purchased-link' %>
                   <% end %>
                 <% end %>
               </li>
@@ -153,5 +153,13 @@
       alert( 'Please add a gift before submitting.' );
       return false;
     }
+  }
+
+  function markGiftRequestPurchased( sender ) {
+    if( confirm( 'Copy new item to purchased list?' ) ) {
+      var href = $(sender).attr( 'href' ) + "&amp;copy_item=true";
+      $(sender).attr( 'href', href );
+    }
+    return true;
   }
 </script>
