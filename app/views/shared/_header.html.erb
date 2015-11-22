@@ -12,6 +12,7 @@
       <div class="collapse navbar-collapse" id="menu-collapse">
         <ul class="nav navbar-nav navbar-right header-links">
           <% if signed_in? %>
+            <li><%= link_to 'Find Friends', users_path, :class => 'header-link' %></li>
             <li><%= link_to current_user.header_link_text, user_path( current_user ), :class => 'header-link' %></li>
             <li><%= link_to 'Sign Out', signout_path, :class => 'header-link', :method => :delete %></li>
           <% else %>

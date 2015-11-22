@@ -6,17 +6,18 @@
         <h3><%= @user.email %></h3>
       </div>
     </div>
-    <div class="row-controls">
-      <div class="col-full">
-        <% if current_user?( @user ) %>
-          <%= link_to 'Find Friends', users_path, :class => 'btn btn-primary' %>
-        <% elsif request = @user.pending_request( current_user ) %>
-          <%= link_to 'Accept Request', accept_friend_path( :friendship_id => request.id ), :class => 'btn btn-primary', :method => 'post' %>
-        <% elsif !@user.has_friend?( current_user ) %>
-          <%= link_to 'Request Friend', add_friend_path( :friend_id => @user.id ), :class => 'btn btn-primary', :method => 'post' %>
-        <% end %>
+
+    <% if !current_user?( @user ) %>
+      <div class="row-controls">
+        <div class="col-full">
+          <% if request = @user.pending_request( current_user ) %>
+            <%= link_to 'Accept Request', accept_friend_path( :friendship_id => request.id ), :class => 'btn btn-primary', :method => 'post' %>
+          <% elsif !@user.has_friend?( current_user ) %>
+            <%= link_to 'Request Friend', add_friend_path( :friend_id => @user.id ), :class => 'btn btn-primary', :method => 'post' %>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
 
     <% if current_user?( @user ) && @user.friend_requests.count > 0 %>
       <div class="row-requests">
