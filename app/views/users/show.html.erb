@@ -26,7 +26,7 @@
             Pending Requests
           </div>
           <ul class="friend-request-list">
-            <% @user.friend_requests( :include_users => true ).each do |request| %>
+            <% @user.friend_requests( :include_users => true ).sort_by( &:created_at ).each do |request| %>
               <li><%= request.user.full_name %> <%= link_to 'Accept', accept_friend_path( :friendship_id => request.id ), :method => :post %> <%= link_to 'Deny', deny_friend_path( :friendship_id => request.id ), :method => :post, :data => { :confirm => 'Are you sure?' } %></li>
             <% end %>
           </ul>
@@ -56,7 +56,7 @@
             Gift Requests
           </div>
           <ul class="gift-list">
-            <% @user.gift_requests.each do |gift_request| %>
+            <% @user.gift_requests.sort_by( &:created_at ).each do |gift_request| %>
               <li>
                 <p class="name"><%= gift_request.name %></p>
                 <p class="description"><%= gift_request.description %></p>
@@ -94,7 +94,7 @@
             Gifts Purchased
           </div>
           <ul class="gift-list">
-            <% @user.gifts.each do |gift| %>
+            <% @user.gifts.sort_by( &:created_at ).each do |gift| %>
               <li>
                 <p class="name"><%= gift.name %></p>
                 <p class="description"><%= gift.description %></p>
@@ -136,7 +136,7 @@
             Gifts Purchased
           </div>
           <ul class="gift-list">
-            <% @user.gifts_purchased.each do |gift| %>
+            <% @user.gifts_purchased.sort_by( &:created_at ).each do |gift| %>
               <p class="name"><%= gift.name %></p>
               <p class="description"><%= gift.description %></p>
               <p class="buyer">Purchased for: <%= link_to gift.user.full_name, user_path( gift.user ) %></p>
