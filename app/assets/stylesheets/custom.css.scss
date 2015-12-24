@@ -277,37 +277,41 @@ $footer-height: 0px;
         margin: 0;
       }
     }
-  }
 
-  .gift-list {
-    @extend .info-list;
+    .gift-list {
+      @extend .info-list;
 
-    .name {
-      font-weight: 400;
-      font-size: 16px;
+      li {
+        margin-bottom: 10px;
+      }
 
-      padding: 0;
-      margin: 0;
-    }
+      .name {
+        font-weight: 400;
+        font-size: 16px;
 
-    .buyer {
-      font-size: 14px;
+        padding: 0;
+        margin: 0;
+      }
 
-      padding: 0;
-      margin: 0;
-    }
+      .buyer {
+        font-size: 14px;
 
-    .description {
-      font-size: 14px;
+        padding: 0;
+        margin: 0;
+      }
 
-      padding: 0;
-      margin: 0;
+      .description {
+        font-size: 14px;
 
-      font-style: italic;
-    }
+        padding: 0;
+        margin: 0;
 
-    .mark_gift_request_purchased {
-      font-size: 14px;
+        font-style: italic;
+      }
+
+      .mark_gift_request_purchased {
+        font-size: 14px;
+      }
     }
   }
 }

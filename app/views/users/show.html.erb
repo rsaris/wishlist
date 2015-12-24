@@ -51,7 +51,7 @@
         <h3>
           <%= current_user?( @user ) ? 'My' : "#{@user.first_name}'s" %> Gift Requests
         </h3>
-        <ul class="info-list">
+        <ul class="gift-list">
           <% @user.gift_requests.sort_by( &:created_at ).each do |gift_request| %>
             <li>
               <p class="name"><%= gift_request.name %></p>
