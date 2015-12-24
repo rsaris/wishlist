@@ -234,18 +234,10 @@ $footer-height: 0px;
     text-align: center;
   }
 
-  .row-requests {
+  .row-pending-requests {
     @extend .row;
 
-    .header {
-      text-align: center;
-      font-size: 22px;
-      font-weight: 400;
-
-      margin: 20px 0;
-    }
-
-    .friend-request-list {
+    .pending-requests-list {
       list-style: none;
       text-align: center;
       padding: 0;
@@ -258,18 +250,19 @@ $footer-height: 0px;
     }
   }
 
-  .row-friends {
+  .row-info {
     @extend .row;
 
-    .header {
-      text-align: center;
-      font-size: 22px;
-      font-weight: 400;
-
+    h3 {
       margin: 20px 0;
     }
 
-    .friend-list {
+    .col-info {
+      @extend .col-sm-4;
+      @extend .col-xs-12;
+    }
+
+    .info-list {
       list-style: none;
       text-align: center;
       padding: 0;
@@ -279,43 +272,11 @@ $footer-height: 0px;
         padding: 0;
         margin: 0;
       }
-    }
-  }
-
-  .row-gift-requests {
-    @extend .row;
-
-    .header {
-      text-align: center;
-      font-size: 22px;
-      font-weight: 400;
-
-      margin: 20px 0;
-    }
-  }
-
-  .row-gifts {
-    @extend .row;
-
-    .header {
-      text-align: center;
-      font-size: 22px;
-      font-weight: 400;
-
-      margin: 20px 0;
     }
   }
 
   .gift-list {
-    list-style: none;
-    text-align: center;
-    padding: 0;
-    margin: 0;
-
-    li {
-      padding: 0 0 10px 0;
-      margin: 0;
-    }
+    @extend .info-list;
 
     .name {
       font-weight: 400;

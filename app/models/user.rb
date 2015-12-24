@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     self.email = email.downcase
   end
 
+  def first_name
+    self.full_name.split( ' ' )[0]
+  end
+
   def friends
     User.find( friend_ids )
   end
