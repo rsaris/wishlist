@@ -237,6 +237,10 @@ $footer-height: 0px;
   .row-pending-requests {
     @extend .row;
 
+    h3 {
+      margin: 20px 0;
+    }
+
     .pending-requests-list {
       list-style: none;
       text-align: center;
